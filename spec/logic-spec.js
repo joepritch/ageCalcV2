@@ -1,14 +1,20 @@
 import { GetAge } from "./../src/logic.js"
 
 describe("GetAge", function(){
+  var instance;
+
+  beforeEach(function(){
+    instance = new GetAge;
+  });
+
   it('should create a new Date object of the current date and assign the year to a variable', function(){
-    let currentYear = new Date().getFullYear();
+    let currentYear = instance.getCurrentYear();
     expect(currentYear).toEqual(2019);
   });
 
   it('should create a new Date object with the users input birth date and assign the year to a variable', function(){
-    let birthYear = new Date('1996-07-17');
-    expect(birthYear.getFullYear()).toEqual(1996);
+    let birthYear = instance.getBirthYear('1996-07-17');
+    expect(birthYear).toEqual(1996);
   });
 
   it('should read the year from both date objects and subtract the users "birth date" year from the "current date" year', function(){
