@@ -8,27 +8,27 @@ describe("GetAge", function(){
   });
 
   it('should create a new Date object of the current date and assign the year to a variable', function(){
-    let currentYear = instance.getCurrentYear();
+    let currentYear = instance.getYear();
     expect(currentYear).toEqual(2019);
   });
 
   it('should create a new Date object with the users input birth date and assign the year to a variable', function(){
-    let birthYear = instance.getBirthYear('1996-07-17');
+    let birthYear = instance.getYear('1996-07-17');
     expect(birthYear).toEqual(1996);
   });
 
   it('should read the year from both date objects and subtract the users "birth date" year from the "current date" year', function(){
-    let currentYear = instance.getCurrentYear();
-    let birthYear = instance.getBirthYear('1996-07-17');
+    let currentYear = instance.getYear();
+    let birthYear = instance.getYear('1996-07-17');
     let userAge = instance.getUserAge(birthYear, currentYear);
     expect(userAge).toEqual(23);
   });
 
   it('should divide the users age (determined in the previous step) by various numbers to determine the users age on different planets', function(){
-    let currentYear = instance.getCurrentYear();
-    let birthYear = instance.getBirthYear('1996-07-17');
+    let currentYear = instance.getYear();
+    let birthYear = instance.getYear('1996-07-17');
     let userAge = instance.getUserAge(birthYear, currentYear);
-    let agesArray = instance.getPlanetaryAge(userAge);
+    let agesArray = instance.getPlanetary(userAge);
     let mercuryAge = agesArray[0];
     let venusAge = agesArray[1]
     let marsAge = agesArray[2]
@@ -40,14 +40,26 @@ describe("GetAge", function(){
   });
 
   it('should subtract the users age from 80 to determine the users life expectancy', function(){
-    let currentYear = instance.getCurrentYear();
-    let birthYear = instance.getBirthYear('1996-07-17');
+    let currentYear = instance.getYear();
+    let birthYear = instance.getYear('1996-07-17');
     let userAge = instance.getUserAge(birthYear, currentYear);
     let remainingYears = instance.getLifeExpectancy(userAge);
     expect(remainingYears).toEqual(57);
   });
 
   it('should take the users remaning earth years and divid it by various numbers to determine the users remaining years on different planets', function(){
-    
+    let currentYear = instance.getYear();
+    let birthYear = instance.getYear('1996-07-17');
+    let userAge = instance.getUserAge(birthYear, currentYear);
+    let remainingYears = instance.getLifeExpectancy(userAge);
+    let remainingArray = instance.getPlanetary(remainingYears);
+    let mercuryRem = remainingArray[0];
+    let venusRem = remainingArray[1];
+    let marsRem = remainingArray[2];
+    let jupiterRem = remainingArray[3];
+    expect(mercuryRem).toEqual(237);
+    expect(venusRem).toEqual(91);
+    expect(marsRem).toEqual(30);
+    expect(jupiterRem).toEqual(4);
   });
 });

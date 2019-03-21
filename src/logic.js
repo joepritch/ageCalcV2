@@ -1,17 +1,16 @@
 export class GetAge {
-  getCurrentYear(){
-    const currentYear = new Date().getFullYear();
-    return currentYear;
-  }
-  getBirthYear(birthDate){
-    const birthYear = new Date(birthDate).getFullYear();
-    return birthYear;
+  getYear(birthDate){
+    let year = new Date(birthDate).getFullYear();
+    if (isNaN(year)) {
+      year = new Date().getFullYear();
+    }
+    return year;
   }
   getUserAge(birthYear, currentYear){
     const userAge = currentYear - birthYear;
     return userAge;
   }
-  getPlanetaryAge(userAge){
+  getPlanetary(userAge){
     const planetaryArray = [.24, .62, 1.88, 11.86];
     let ageArray = [];
     for (var i = 0; i < planetaryArray.length; i++) {
