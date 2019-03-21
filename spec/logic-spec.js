@@ -18,18 +18,21 @@ describe("GetAge", function(){
   });
 
   it('should read the year from both date objects and subtract the users "birth date" year from the "current date" year', function(){
-    let currentYear = 2019;
-    let birthYear = 1996;
-    let userAge = currentYear - birthYear;
+    let currentYear = instance.getCurrentYear();
+    let birthYear = instance.getBirthYear('1996-07-17');
+    let userAge = instance.getUserAge(birthYear, currentYear);
     expect(userAge).toEqual(23);
   });
 
   it('should divide the users age (determined in the previous step) by various numbers to determine the users age on different planets', function(){
-    let userAge = 23;
-    let mercuryAge = Math.floor(userAge / .24);
-    let venusAge = Math.floor(userAge / .62);
-    let marsAge = Math.floor(userAge / 1.88);
-    let jupiterAge = Math.floor(userAge / 11.86);
+    let currentYear = instance.getCurrentYear();
+    let birthYear = instance.getBirthYear('1996-07-17');
+    let userAge = instance.getUserAge(birthYear, currentYear);
+    let agesArray = instance.getPlanetaryAge(userAge);
+    let mercuryAge = agesArray[0];
+    let venusAge = agesArray[1]
+    let marsAge = agesArray[2]
+    let jupiterAge = agesArray[3]
     expect(mercuryAge).toEqual(95);
     expect(venusAge).toEqual(37);
     expect(marsAge).toEqual(12);
@@ -37,9 +40,14 @@ describe("GetAge", function(){
   });
 
   it('should subtract the users age from 80 to determine the users life expectancy', function(){
-    let userAge = 23;
-    let avgLife = 80;
-    let remainingYears = avgLife - userAge;
+    let currentYear = instance.getCurrentYear();
+    let birthYear = instance.getBirthYear('1996-07-17');
+    let userAge = instance.getUserAge(birthYear, currentYear);
+    let remainingYears = instance.getLifeExpectancy(userAge);
     expect(remainingYears).toEqual(57);
+  });
+
+  it('should take the users remaning earth years and divid it by various numbers to determine the users remaining years on different planets', function(){
+    
   });
 });
